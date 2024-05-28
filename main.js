@@ -4,8 +4,6 @@
 
 //Ingreso con Usuario y Contraseña
 const usuario1 = "Matias";
-const usuario2 = "Momo";
-const usuario3 = "Micaela";
 const pass = 12345;
 
 //Funcion ingreso Numérico correcto
@@ -26,19 +24,12 @@ function usuarios() {
     let usuario = prompt("Ingrese nombre de Usuario:").toLowerCase();
     let password = Number(prompt("Ingrese contraseña:"));
 
-    if (
-      (usuario === usuario1 || usuario === usuario2 || usuario === usuario3) &&
-      password === pass
-    ) {
-      break;
-    } else if (
-      usuario != usuario1 ||
-      usuario != usuario2 ||
-      usuario != usuario3 ||
-      password != pass
-    ) {
+    if (usuario != "matias" || password != 12345) {
       alert("Usuario Desconocido,intente nuevamente");
-      continue;
+      let usuario = prompt("Ingrese nombre de Usuario:").toLowerCase();
+      let password = Number(prompt("Ingrese contraseña:"));
+    } else if (usuario === "matias" && password === 12345) {
+      break;
     } else {
       alert("Por favor debe ingresar algo");
     }
@@ -124,14 +115,14 @@ while (true) {
     if (selector === "sumar" || selector === "+") {
       for (let i = 0; i < gestion; i++) {
         let suma = Number(prompt("Indique unidades a sumar"));
-        stockTotal = stockInicial + suma;
+        stockTotal = (stockInicial + suma) * i;
         alert("Stock actualizado total: " + stockTotal + " unidades");
       }
       break;
     } else if (selector === "restar" || selector === "-") {
       for (let i = 0; i < gestion; i++) {
         let resta = Number(prompt("Indique unidades a descontar"));
-        stockTotal = stockInicial - resta;
+        stockTotal = (stockInicial - resta) * i;
         alert("Stock actualizado total: " + stockTotal + " unidades");
       }
       break;
