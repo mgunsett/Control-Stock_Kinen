@@ -1,0 +1,56 @@
+
+* {
+    margin: 2%;
+    padding: 5px;
+    box-sizing: border-box;
+}
+
+body {
+    background-image:url('./img/panal_fondo.png');
+    background-repeat: no-repeat;
+    background-position: left center;
+    background-attachment:fixed;
+    background-size: auto;
+}
+body nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+nav .titulo h1{
+    font-size: 50px;
+    font-weight: 900;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif  ;
+    color: rgb(63, 81, 144);
+    width: 400px;
+}
+nav .titulo p{
+    font-size: 30px;
+    font-weight: 500;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif  ;
+    color: rgb(0, 0, 0);
+}
+nav .iconos {
+    display: flex;
+    justify-content: space-around;
+    align-items:center;
+    gap: 30px;
+    height: 400px;
+    width: 700px;
+}
+nav .iconos i{
+    font-size: 120px;
+    color:rgb(63, 81, 144);
+    background-color: rgba(237, 181, 37, 0.83);
+    border-radius: 50%;
+    width: 160px;
+    height: 160px;
+    text-align: center;
+    transition: all 0.5s;
+}
+nav .iconos i:hover{
+    color:aliceblue;
+    cursor: pointer;
+}
+
