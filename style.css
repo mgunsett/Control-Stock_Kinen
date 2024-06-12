@@ -24,6 +24,9 @@ nav .titulo h1{
     color: rgb(63, 81, 144);
     width: 400px;
 }
+nav .titulo marquee{
+    width: 200px;
+}
 nav .titulo p{
     font-size: 30px;
     font-weight: 500;
