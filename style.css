@@ -137,7 +137,7 @@ nav .iconos i{
     color: rgba(237, 181, 37, 0.83);
     margin: 15px;
 }
-
+/*? Agregar Stock */
 #content{
     display: none;
     background-color:  rgba(63, 81, 144, 0.784);
@@ -153,9 +153,39 @@ nav .iconos i{
     bottom: 50px;
     left: 18vw;
 }
+#content > h3 {
+    font-size: 40px;
+    font-weight: 900;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif  ;
+    color: rgb(255, 255, 255);
+    margin-top: 40px;
+}
+.botonAgregar {
+    width: 360px;
+    height: 60px;
+}
 .info-message {
     color: rgb(2, 135, 2);
     font-weight: bold;
     display: none;
     margin-top: 20px;
+}
+
+/*? Lista de Stock */
+
+#content2 {
+    display: none;
+    display: none;
+    background-color:  rgba(63, 81, 144, 0.784);
+    backdrop-filter: blur(3px);
+    border-radius: 15px;
+    padding: 5px;
+    width: 60vw;
+    height: 80vh;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    position: absolute;
+    bottom: 50px;
+    left: 18vw;
 }

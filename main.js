@@ -31,6 +31,7 @@ let consultaStock = document.querySelector("#consultaStock");
 let agregarStock = document.querySelector("#agregarStock");
 let quitarStock = document.querySelector("#quitarStock");
 let salirStock = document.querySelector("#salirStock");
+let content2 = document.querySelector("#content2");
 
 let stockNuevo = JSON.parse(localStorage.getItem("stockNuevo")) || [];
 
@@ -81,18 +82,19 @@ consultaStock.addEventListener("click", () => {
     let ul = document.createElement("ul");
     stockNuevo.forEach((producto) => {
       let li = document.createElement("li");
-      li.textContent = producto.toString();
+      li.textContent = productos.toString();
       ul.appendChild(li);
     });
-    content.appendChild(ul);
+    content2.appendChild(ul);
+    content.style.display = "none";
+    content2.style.display = "flex";
   }
-  message.style.display = "none";
 });
 
 agregarStock.addEventListener("click", () => {
   content.style.display = "flex";
   mainContento.style.display = "none";
-  let addProductForm = document.getElementById("addProductForm");
+  let addProductForm = document.querySelector("#addProductForm");
   addProductForm.addEventListener("submit", (e) => {
     e.preventDefault();
     let nombre = document.querySelector("#nombreP").value.toLowerCase();
@@ -102,10 +104,16 @@ agregarStock.addEventListener("click", () => {
     if (nombre && precio >= 0 && stock >= 0) {
       stockNuevo.push(new Producto(nombre, precio, stock));
       localStorage.setItem("stockNuevo", JSON.stringify(stockNuevo));
-      showMessage("Producto agregado con éxito", "info");
-      content.innerHTML = "";
+      Swal.fire({
+        title: `Producto agregado con Éxito`,
+        icon: "success",
+      });
+      content2.innerHTML = "";
     } else {
-      showMessage("Por favor, ingrese valores válidos", "error");
+      Swal.fire({
+        title: `Ingrese valores Correctos`,
+        icon: "error",
+      });
     }
   });
 });

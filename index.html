@@ -44,11 +44,26 @@
     <div id="content">
         <h3>Cargar Productos</h3>
         <form id="addProductForm">
-            <input type="text" id="nombreP" placeholder="Nombre del producto">
-            <input type="number" id="precioP" placeholder="Precio">
-            <input type="number" id="stockP" placeholder="Cantidad en stock">
-            <button type="submit">Agregar Producto</button>
+            <div class="input-group mb-3 botonAgregar">
+                <span class="input-group-text">✔️</span>
+                <input type="text" id="nombreP" placeholder="Nombre del producto" class="form-control"
+                    aria-label="Amount (to the nearest dollar)">
+            </div>
+            <div class="input-group mb-3 botonAgregar">
+                <span class="input-group-text">💵</span>
+                <input type="number" id="precioP" placeholder="Precio" class="form-control"
+                    aria-label="Amount (to the nearest dollar)">
+            </div>
+            <div class="input-group mb-3 botonAgregar">
+                <span class="input-group-text">📦</span>
+                <input type="number" id="stockP" placeholder="Cantidad en stock" class="form-control"
+                    aria-label="Amount (to the nearest dollar)">
+            </div>
+            <button type="submit" class="btn btn-warning botonAgregar" id="agregarStock">Agregar Producto</button>
         </form>
+    </div>
+    <div id="content2">
+        <h4>Stock General</h4>
     </div>
     <p id="message" class="info-message" style="display: none;"></p>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
