@@ -3,6 +3,7 @@ let fechaActual = () => {
   let hoy = new Date();
   return hoy.toLocaleDateString();
 };
+
 //Funcion PRODUCTOS --
 class Producto {
   constructor(nombre, precio, stock) {
@@ -20,13 +21,13 @@ class Producto {
 let convertirAProducto = (obj) => {
   return new Producto(obj.nombre, obj.precio, obj.stock);
 };
-//Llamado de elementos del HTML --
+
+//Llamado del DOM --
 let formulario = document.querySelector("form");
 let inicio = document.querySelector(".titulo");
 let iconos = document.querySelector("#icons");
 let mainContent = document.querySelector("#mainContent");
 let content = document.querySelector("#content");
-let mensaje = document.querySelector("#mensaje");
 let loginError = document.querySelector("#loginError");
 let consultaStock = document.querySelector("#consultaStock");
 let agregarStock = document.querySelector("#agregarStock");
@@ -34,8 +35,10 @@ let quitarStock = document.querySelector("#quitarStock");
 let salirStock = document.querySelector("#salirStock");
 let content2 = document.querySelector("#content2");
 let button = document.querySelector("#botonVolver");
+let content_rest = document.querySelector(".content_rest");
 
 //Carga de Usuarios a LocalStorage --
+
 let usuariosCargados = [
   { username: "sucursal1", password: "kinen1" },
   { username: "sucursal2", password: "kinen2" },
@@ -45,6 +48,7 @@ let usuariosValidos = JSON.stringify(usuariosCargados);
 localStorage.setItem("usuarios", usuariosValidos);
 
 //Validacion de Usuario & Pass --
+
 formulario.addEventListener("submit", (e) => {
   e.preventDefault();
 
@@ -68,12 +72,36 @@ formulario.addEventListener("submit", (e) => {
   } else {
     loginError.textContent = "Usuario Desconocido, intente nuevamente";
     loginError.style.display = "block";
+    formulario.reset();
   }
 });
 
 //Stock ---
+
 let stockNuevo = JSON.parse(localStorage.getItem("stockNuevo")) || [];
 stockNuevo = stockNuevo.map(convertirAProducto);
+
+// Funcion actualizar y mostrar stock
+function actualizarTablaStock(templateClass) {
+  let template = document.querySelector(templateClass).content.cloneNode(true);
+  let tbody = template.querySelector("tbody");
+
+  // Limpiar el cuerpo de la tabla
+  tbody.innerHTML = "";
+
+  stockNuevo.forEach((producto, index) => {
+    let tr = document.createElement("tr");
+    tr.innerHTML = `
+      <th scope="row">${index + 1}</th> 
+      <td>${producto.nombre}</td>
+      <td>${producto.stock}</td>
+      <td>$${producto.precio}</td>
+      <td><button class="btn btn-danger btn-sm eliminarProducto" data-index="${index}">Eliminar</button></td>
+    `;
+    tbody.appendChild(tr);
+  });
+  return template;
+}
 
 consultaStock.addEventListener("click", () => {
   if (stockNuevo.length === 0) {
@@ -82,28 +110,29 @@ consultaStock.addEventListener("click", () => {
       icon: "info",
     });
   } else {
-    let ul = document.createElement("ul");
-    stockNuevo.forEach((producto) => {
-      let li = document.createElement("li");
-      li.textContent = producto.toString();
-      ul.appendChild(li);
-    });
-    content2.textContent = "";
-    content2.innerHTML = `<h3>Stock General</h3>`;
-    content2.appendChild(ul);
-    content.style.display = "none";
     content2.style.display = "flex";
-    setTimeout(() => {
+    let template = actualizarTablaStock(".temp_stock");
+    content2.textContent = "";
+    content2.innerHTML = `
+        <h3>Stock General</h3>
+        <button id="closeContent2" class="btn btn-danger"><i class="bi bi-x-lg"></i></button>`;
+    content2.appendChild(template);
+
+    // Cerrar ventana de stock
+    let closeContent2 = document.querySelector("#closeContent2");
+    closeContent2.addEventListener("click", () => {
       content2.style.display = "none";
-    }, 5000);
+    });
   }
 });
 
 // Sumar stock --
+
 agregarStock.addEventListener("click", () => {
   content.style.display = "flex";
   mainContent.style.display = "none";
   let addProductForm = document.querySelector("#addProductForm");
+
   addProductForm.addEventListener("submit", (e) => {
     e.preventDefault();
     let nombre = document.querySelector("#nombreP").value.toLowerCase();
@@ -117,17 +146,8 @@ agregarStock.addEventListener("click", () => {
         title: `Producto agregado con Éxito`,
         icon: "success",
       });
-      content2.innerHTML = " ";
-      content2.innerHTML = `<h3>Stock General</h3>`;
-      stockNuevo.forEach((producto) => {
-        const productItem = document.createElement("li");
-        productItem.textContent = producto.toString();
-        content2.appendChild(productItem);
-      });
-      content2.style.display = "flex";
-      setTimeout(() => {
-        content2.style.display = "none";
-      }, 5000);
+      actualizarTablaStock(".temp_stock");
+      addProductForm.reset(); // Limpiar formulario
     } else {
       Swal.fire({
         title: `Ingrese valores Correctos`,
@@ -142,56 +162,59 @@ agregarStock.addEventListener("click", () => {
 });
 
 // Restar Stock --
+
 quitarStock.addEventListener("click", () => {
-  content.style.display = "flex";
+  content_rest.style.display = "flex";
   mainContent.style.display = "none";
-  content.textContent = " ";
-  content.innerHTML = `
-            <h3>Eliminar Productos</h3>
-            <p class='eliminarP'>Seleccione un producto para eliminar:</p>
-            <ul id="productList" class="listaE"></ul>
-            <button type="button" class="btn btn-success botonAgregar" id="botonVolver2">Volver</button>`;
-
-  let productList = document.querySelector("#productList");
-  let button2 = document.querySelector("#botonVolver2");
-  function eliminarProducto(index, li) {
-    stockNuevo.splice(index, 1);
-    localStorage.setItem("stockNuevo", JSON.stringify(stockNuevo));
-    productList.removeChild(li);
-    showMessage("Producto eliminado con éxito", "info");
-  }
-
-  stockNuevo.forEach((producto, index) => {
-    let li = document.createElement("li");
-    li.textContent = producto.nombre;
-    li.classList.add("listaE");
-    li.addEventListener("click", () => {
-      eliminarProducto(index, li);
-    });
-    productList.appendChild(li);
-  });
-  button2.addEventListener("click", () => {
-    content.style.display = "none";
+  let template = actualizarTablaStock(".temp_rest");
+  content_rest.textContent = "";
+  content_rest.innerHTML = `
+        <h3>Eliminar Productos</h3>
+        <button id="closeContent2" class="btn btn-danger close_rest"><i class="bi bi-x-lg"></i></button>
+        <p>Seleccione un producto para eliminar:</p>`;
+  content_rest.appendChild(template);
+  // Cerrar ventana
+  let close_rest = document.querySelector(".close_rest");
+  close_rest.addEventListener("click", () => {
+    content_rest.style.display = "none";
     mainContent.style.display = "flex";
+  });
+
+  content_rest.querySelectorAll(".eliminarProducto").forEach((button) => {
+    button.addEventListener("click", (e) => {
+      let index = e.target.getAttribute("data-index");
+      // Alerta!
+      Swal.fire({
+        title: "Seguro desea eliminar?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Si, ELIMINAR!",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          stockNuevo.splice(index, 1);
+          localStorage.setItem("stockNuevo", JSON.stringify(stockNuevo));
+          //Elimnacion de elemento en tabla
+          let tr = e.target.closest("tr");
+          tr.parentNode.removeChild(tr);
+          //Cofirma Eliminacion
+          Swal.fire({
+            title: "Eliminado!",
+            text: "Producto se ha eliminado!",
+            icon: "success",
+          });
+          actualizarTablaStock(".temp_rest");
+        }
+      });
+    });
   });
 });
 
 // Salir del Sistema --
+
 salirStock.addEventListener("click", () => {
   mainContent.style.display = "none";
   inicio.style.display = "block";
   iconos.style.display = "flex";
-  message.style.display = "none";
 });
-
-let showMessage = (msg, type) => {
-  mensaje.textContent = msg;
-  mensaje.className = type === "error" ? "error-message" : "info-message";
-  mensaje.style.display = "block";
-  setTimeout(() => {
-    mensaje.style.display = "none";
-  }, 3000);
-};
-
-//! Profe trate de darle funcionalidad y valor al 'mensaje' pero no lo logre,
-//! quise hace algo distito a las alertas previas pero no pude. Si me da una mano con eso se lo agradezco !

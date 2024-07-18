@@ -2,6 +2,7 @@
     margin: 0;
     padding:0;
     box-sizing: border-box;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif  ;
 }
 
 body {
@@ -31,14 +32,17 @@ nav .titulo{
 nav .titulo h1{
     font-size: 50px;
     font-weight: 900;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif  ;
     color: rgb(255, 255, 255);
-    margin-top: 150px;
-}   
-nav .titulo p{
+    margin-top: 80px;
+}
+nav .titulo h2{
+    font-size: 35px;
+    font-weight: 900;
+    color: rgba(35, 33, 69, 0.849);
+}
+p{
     font-size: 20px;
     font-weight: 100;
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     color: rgba(255, 255, 255, 0.384);
     margin-bottom: 20px;  
 }
@@ -88,8 +92,8 @@ nav .iconos i{
     box-shadow: 2px 2px 24px 3px rgba(0,0,0,0.62);
     -webkit-box-shadow: 2px 2px 24px 3px rgba(0,0,0,0.62);
     -moz-box-shadow: 2px 2px 24px 3px rgba(0,0,0,0.62);
-    width: 160px;
-    height: 160px;
+    width: 170px;
+    height: 170px;
     text-align: center;
     transition: all 0.5s;
 }
@@ -127,14 +131,12 @@ nav .iconos i{
 .menuPrincipal > h2 {
     font-size: 50px;
     font-weight: 900;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif  ;
     color: rgb(255, 255, 255);
     margin-top: 70px;
 }
 .menuPrincipal > h3 {
     font-size: 30px;
     font-weight: 600;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif  ;
     color: rgba(237, 181, 37, 0.83);
     margin: 15px;
 }
@@ -148,73 +150,73 @@ nav .iconos i{
     width: 60vw;
     height: 80vh;
     flex-direction: column;
-    gap: 10px;
     align-items: center;
     position: absolute;
     bottom: 50px;
     left: 18vw;
 }
+.h3_principal {
+    font-size: 40px;
+    font-weight: 900;
+    color: rgb(255, 255, 255);
+    margin-top: 20px;
+}
 h3 {
     font-size: 40px;
     font-weight: 900;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif  ;
     color: rgb(255, 255, 255);
-    margin-top: 40px;
+    margin-top: 70px;
 }
 .botonAgregar {
     width: 360px;
     height: 60px;
 }
-.info-mensaje {
-    color: rgb(2, 135, 2);
-    font-weight: bold;
-    font-size: 30px;
-    display: none;
-    margin-top: 20px;
-}
 
 /*? Lista de Stock */
 
-#content2 {
-    display: none;
+#content2, .content_rest {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     background-color:  rgba(63, 81, 144, 0.784);
     backdrop-filter: blur(15px);
     border-radius: 15px;
     padding: 5px;
     width: 60vw;
     height: 80vh;
-    flex-direction: column;
     gap: 10px;
-    align-items: center;
     position: absolute;
     bottom: 50px;
     left: 18vw;
 }
-#content2 ul {
-    display: flex;
-    flex-direction: column;
-    align-items:center;
-    gap: 10px;
-    margin-top: 15px;
-    width: 40vw;
-    border: 2px solid rgba(237, 181, 37, 0.83);
-    border-radius: 15px;
-    padding: 50px;
+#content2 table, .content_rest table {
+    width: 80%;
+    border-collapse: collapse;
+    margin: 20px 0;
 }
-#content2 ul li {
-    list-style:square;
-    font-size: 10px;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif  ;    
-    color: rgba(255, 255, 255, 0.384);
+th {
+    font-size: 15px;   
+    font-weight: 800;
+    color: rgba(255, 255, 255, 0.674);
+    border: 1px solid rgba(237, 181, 37, 0.83);
+    padding: 8px;
+    text-align: center;
 }
 
-.eliminarP{
-    font-size: 20px;
-    font-weight: 100;
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    color: rgba(255, 255, 255, 0.384);
-    margin-bottom: 10px;
+tr {
+    font-size: 12px;   
+    font-weight: 200;
+    color: rgba(245, 239, 239, 0.948);
+    border: 1px solid rgba(237, 181, 37, 0.83);
+    padding: 8px;
+    text-align: center;
 }
+#content2 tr:nth-child(even), .content_rest tr:nth-child(even) {
+    background-color:  rgba(94, 112, 176, 0.784);
+    backdrop-filter: blur(15px);
+  }
+/*? Eliminar Producto */
+
 #productList {
     display: flex;
     flex-direction:column;
@@ -229,9 +231,13 @@ h3 {
 #productList li {
     list-style:square;
     font-size: 15px;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif  ;
     font-weight: 600;    
     color: rgba(255, 255, 255, 0.384);
     cursor: pointer;
 }
 
+#closeContent2 {
+    position: absolute;
+    left: 53.5rem;
+    bottom: 31rem;
+}
