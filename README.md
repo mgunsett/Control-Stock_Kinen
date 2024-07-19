@@ -14,7 +14,11 @@
 
 ###
 
-<h2 align="left">Pre-Entrega2 JS</h2>
+<p align="left">🟢 Usario 1 : sucursal1  |  Pass : kinen1 <br>🟢 Usario 2 : sucursal2  |  Pass : kinen2 </p>
+
+###
+
+<h2 align="left">Entrega Final JS</h2>
 
 ###
 

@@ -4,44 +4,6 @@ let fechaActual = () => {
   return hoy.toLocaleDateString();
 };
 
-// API Dolar
-
-// const criptoYa = "https://criptoya.com/api/dolar";
-
-// let divDolar = document.querySelector("#divDolar");
-
-// fetch(criptoYa)
-//   .then((response) => response.json())
-//   .then(({ blue, ccl, mep, oficial }) => {
-//     Toastify({
-//       text: `Ten en cuenta!
-//       Usd$ Oficial: ${oficial.price}
-//       Usd$ MEP: ${mep.gd30.ci.price}
-//       Usd$ CCL: ${ccl.gd30.ci.price}
-//       Usd$ Blue: ${blue.ask}`,
-//       duration: 3000,
-//       gravity: "top",
-//       position: "right",
-//       backgroundColor: "linear-gradient(to right, #00b09b, #96c93d)",
-//       stopOnFocus: true,
-//     }).showToast();
-//     console.log(blue, ccl, mep, oficial);
-//   })
-//   .catch((error) => console.error(error));
-
-// fetch(criptoYa)
-// .then((response) => response.json())
-// .then(({ blue, ccl, mep, oficial }) => {
-//   divDolar.innerHTML = `
-//           <h3>Ten en cuenta!</h3>
-//           <p>Usd$ Oficial: ${oficial.price} </p>
-//           <p>Usd$ MEP: ${mep.gd30.ci.price} </p>
-//           <p>Usd$ CCL: ${ccl.gd30.ci.price} </p>
-//           <p>Usd$ Blue: ${blue.ask} </p>
-//         `;
-// })
-// .catch((error) => console.error(error));
-
 //Funcion PRODUCTOS --
 class Producto {
   constructor(nombre, precio, stock) {
